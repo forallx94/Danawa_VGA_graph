@@ -1,0 +1,3 @@
+[submodule "Danawa-Crawler"]
+	path = Danawa-Crawler
+	url = https://github.com/sammy310/Danawa-Crawler.git
