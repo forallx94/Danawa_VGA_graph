@@ -2,6 +2,12 @@
 
 코인과 함께 변동되고 있는 그래픽 카드 가격을 확인하고자 그래프를 생성
 
+# 
+
+[EVGA - NVIDIA GeForce RTX 3060 XC GAMING 12GB GDDR6 PCI Express 4.0 Graphics Card](https://www.bestbuy.com/site/searchpage.jsp?id=pcat17071&st=rtx+3060)
+
+[EVGA - NVIDIA GeForce RTX 3060 XC GAMING 12GB GDDR6 PCI Express 4.0 Graphics Card](/2021-06-12 RTX 3060 12GB.png)
+
 # Install
 
 ```bash
