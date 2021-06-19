@@ -2,7 +2,14 @@
 
 코인과 함께 변동되고 있는 그래픽 카드 가격을 확인하고자 그래프를 생성
 
-# 
+코드 진행시 
+
+2060, 2070, 2080, 2080 ti, 3060, 3060 ti, 3070, 3070 ti, 3080, 3080 ti
+
+위 항목에 대한 2021 그래프와 평균 그래프 생성
+
+
+# 3060 기준 가격
 
 [EVGA - NVIDIA GeForce RTX 3060 XC GAMING 12GB GDDR6 PCI Express 4.0 Graphics Card](https://www.bestbuy.com/site/searchpage.jsp?id=pcat17071&st=rtx+3060)
 
@@ -15,10 +22,6 @@ pip install -r requirements.txt
 ```
 
 # How to use
-
-포함하고 싶은 단어를 contain_str 에 포함시키지 않을 단어를 without_str로 설정  
-
-ex) 3060 그래프 가격만 원할 시 3060 Ti 를 제외 해야 되므로 포함 단어 3060 제외 단어 Ti
 ```bash
-python graph.py --contain_str 3060 --without_str Ti
+python graph.py
 ```
