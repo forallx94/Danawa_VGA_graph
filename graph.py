@@ -19,7 +19,7 @@ class vga_graph():
     def __init__(self):
         self.vga_list = ['2060','2070','2080','3060','3070','3080']
         self.vga_ti_list = ['2080','3060','3070','3080']
-        
+
 
     def withoutti(self,df,vga):
         vga_df =df[df.index.str.contains(vga) & ~df.index.str.contains('Ti')]
@@ -30,8 +30,6 @@ class vga_graph():
 
         # 평균 그래프 생성
         self.average_graph.loc[f'{vga}'] = vga_df.mean()
-        fig = px.line(vga_df.mean())
-        po.write_html(fig, file=f'./graph/vga_{vga}_average_graph.html',auto_open=False)
 
 
     def withti(self,df,vga):
@@ -43,8 +41,6 @@ class vga_graph():
 
         # 평균 그래프 생성
         self.average_graph.loc[f'{vga}Ti'] = vga_df.mean()
-        fig = px.line(vga_df.mean())
-        po.write_html(fig, file=f'./graph/vga_{vga}Ti_average_graph.html',auto_open=False)
 
 
     def main(self):
