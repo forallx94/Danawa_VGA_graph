@@ -17,7 +17,7 @@ def clean_currency(x):
 
 class vga_graph():
     def __init__(self):
-        self.vga_list = ['2060','2070','2080','3060','3070','3080']
+        self.vga_list = ['2060','2070','2080','3060','3070','3080','3090']
         self.vga_ti_list = ['2080','3060','3070','3080']
 
 
