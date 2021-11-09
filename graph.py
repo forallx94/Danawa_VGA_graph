@@ -8,12 +8,12 @@ import plotly.express as px
 import plotly.io as po
 
 def clean_currency(x):
-    """ If the value is a string, then remove currency symbol and delimiters
-    otherwise, the value is numeric and can be converted
-    """
     if isinstance(x, str):
-        return(x.replace(',', ''))
-    return(x)
+        x = x.replace(',', '')
+        if '|' in x:
+            return max([i.split('_')[1] for i in x.split('|')])
+        else:
+            return x
 
 class vga_graph():
     def __init__(self):
@@ -22,7 +22,7 @@ class vga_graph():
 
 
     def withoutti(self,df,vga):
-        vga_df =df[df.index.str.contains(vga) & ~df.index.str.contains('Ti')]
+        vga_df = df[df.index.str.contains(vga) & ~df.index.str.contains('Ti')]
 
         # graph 생성
         fig = px.line(vga_df.T)
@@ -33,7 +33,7 @@ class vga_graph():
 
 
     def withti(self,df,vga):
-        vga_df =df[df.index.str.contains(vga) & df.index.str.contains('Ti')]
+        vga_df = df[df.index.str.contains(vga) & df.index.str.contains('Ti')]
 
         # graph 생성
         fig = px.line(vga_df.T)
@@ -44,19 +44,22 @@ class vga_graph():
 
 
     def main(self):
-        # 2021년 그래프
         vga_csv_list = glob('./Danawa-Crawler/crawl_data/Last_Data/2021-*/VGA.csv')
         # 시작 설정
         df = pd.read_csv(vga_csv_list[0])
+        df = df.drop(['Id'],axis=1)
 
-        for vga_path in vga_csv_list[0:]:
-            df = df.merge(pd.read_csv(vga_path), how='outer', on='Name')
+        for vga_path in vga_csv_list[1:]:
+            temp_df = pd.read_csv(vga_path)
+            temp_df = temp_df.drop(['Id'],axis=1)
+            df = df.merge(temp_df, how='outer', on='Name')
 
         # 최신 추가
-        df = df.merge(pd.read_csv('./Danawa-Crawler/crawl_data/VGA.csv'), how='outer', on='Name')
-        
-        # 몇몇 불필요 columns 삭제 ( 해당 부분 재설정 필요 )
-        df = df.set_index('Name').drop(['Id_x','Id_y'],axis=1)
+        temp_df = pd.read_csv('./Danawa-Crawler/crawl_data/VGA.csv')
+        temp_df = temp_df.drop(['Id'],axis=1)
+        df = df.merge(temp_df, how='outer', on='Name')
+
+        df = df.set_index(['Name'])
 
         # value를 str 에서 int로 변경
         for col_ in df.columns:
@@ -65,6 +68,14 @@ class vga_graph():
 
         # 0를 nan으로 변경
         df = df.replace(0, np.NaN)
+
+        # 중복 제거
+        df = df.drop_duplicates()
+        for name,num in df.index.value_counts().items():
+            if num > 1:
+                duplicate_df = df.loc[name]
+                df = df.drop([name])
+                df.loc[name] = duplicate_df.mean()
 
         self.average_graph = pd.DataFrame(columns=df.columns)
 
