@@ -22,7 +22,7 @@ python graph.py
 
 # Sample graph
 
-![2021-07-09 average_graph](/graph/2021-07-09_average_graph.png)
+![2021-07-09 average_graph](/graph/2021-11-17_average_graph.png)
 
 # 3060 기준 가격
 
