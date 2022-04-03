@@ -44,7 +44,7 @@ class vga_graph():
 
 
     def main(self):
-        vga_csv_list = glob('./Danawa-Crawler/crawl_data/Last_Data/2021-*/VGA.csv')
+        vga_csv_list = glob('./Danawa-Crawler/crawl_data/Last_Data/202[0-9]-*/VGA.csv')
         # 시작 설정
         df = pd.read_csv(vga_csv_list[0])
         df = df.drop(['Id'],axis=1)
